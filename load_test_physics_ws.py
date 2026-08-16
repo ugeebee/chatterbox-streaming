@@ -111,12 +111,13 @@ async def perform_request(url, req_id, text_payload, diffusion_steps):
                 
             if all_audio_data and final_sr:
                 combined_audio = np.concatenate(all_audio_data)
-                filename = f"physics_req_{req_id}.wav"
+                safe_req_id = str(req_id).replace('/', '_').replace(' ', '_').replace('(', '').replace(')', '')
+                filename = f"physics_req_{safe_req_id}.wav"
                 scipy.io.wavfile.write(filename, final_sr, combined_audio)
                 
             rtf = delivery_time / total_audio_duration if total_audio_duration > 0 else 0
             
-            print(f"  [Req {req_id}] Success | Latency: {latency:.2f}s | Audio: {total_audio_duration:.2f}s | RTF: {rtf:.2f}x")
+            print(f"  [Req {req_id}] Success | TTFA: {latency:.2f}s | Audio: {total_audio_duration:.2f}s | RTF: {rtf:.2f}x")
             
             return {
                 "req_id": req_id,
@@ -213,7 +214,7 @@ async def main():
         avg_dur = sum(r["audio_duration"] for r in successful) / len(successful)
         
         print(f"  Avg Audio Dur          : {avg_dur:.2f} s")
-        print(f"  Avg Latency (TTFB)     : {avg_latency:.2f} s")
+        print(f"  Avg TTFA               : {avg_latency:.2f} s")
         print(f"  Avg RTF                : {avg_rtf:.2f}x")
 
 if __name__ == "__main__":
