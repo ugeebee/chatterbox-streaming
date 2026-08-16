@@ -23,7 +23,10 @@ dependencies = [
     "matplotlib",
     "whisper-openai",
     "jiwer",
-    "sounddevice==0.5.2"
+    "sounddevice==0.5.2",
+    "fastapi",
+    "uvicorn",
+    "websockets"
 ]
 
 [project.urls]
