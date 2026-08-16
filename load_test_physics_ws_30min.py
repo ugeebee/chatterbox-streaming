@@ -174,10 +174,10 @@ async def main():
     # This keeps the total volume similar to your 10 and 20 concurrency script (around 30-50 total requests),
     # but spaces them out variably to prevent instant OOM crashes.
     phases = [
-        {"name": "Warmup (2 req/min)", "duration": 60, "rate": 2.0 / 60.0},     # 1 request every 30s
-        {"name": "Steady Load (10 req/min)", "duration": 120, "rate": 10.0 / 60.0}, # 1 request every 6s
-        {"name": "Peak Load (25 req/min)", "duration": 60, "rate": 25.0 / 60.0},   # 1 request every 2.4s
-        {"name": "Cooldown (5 req/min)", "duration": 60, "rate": 5.0 / 60.0}      # 1 request every 12s
+        {"name": "Warmup (2 req/min)", "duration": 300, "rate": 2.0 / 60.0},     # 1 request every 30s for 5 mins
+        {"name": "Steady Load (10 req/min)", "duration": 900, "rate": 10.0 / 60.0}, # 1 request every 6s for 15 mins
+        {"name": "Peak Load (25 req/min)", "duration": 300, "rate": 25.0 / 60.0},   # 1 request every 2.4s for 5 mins
+        {"name": "Cooldown (5 req/min)", "duration": 300, "rate": 5.0 / 60.0}      # 1 request every 12s for 5 mins
     ]
     
     # Calculate how many essays we need roughly + buffer
