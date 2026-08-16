@@ -3,8 +3,7 @@ import websockets
 import json
 
 async def test_stream():
-    uri = "ws://localhost:8000/ws/generate_stream"
-    
+    uri = "ws://10.9.3.166:8000/ws/generate_stream"
     # Payload for the TTS request
     payload = {
         "text": "Hello, this is a real-time streaming test of the Chatterbox Text-to-Speech model via WebSockets.",
